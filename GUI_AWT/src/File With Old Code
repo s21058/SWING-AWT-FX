@@ -1,0 +1,169 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Balloon extends JFrame {
+//    private JButton button= new JButton("Hello");
+//    private JTextField input = new JTextField("",5);
+//    private JLabel label= new JLabel("Input: ");
+//    private JRadioButton radioButton=new JRadioButton("Select this");
+//    private JRadioButton radioButton1=new JRadioButton("Select this");
+//    public Balloon(){
+//        super("Ex");
+//        this.setBounds(500,250,200,200);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        Container container =this.getContentPane();
+//        container.setLayout(new GridLayout(3,2,2,2));
+//        container.add(label);
+//        container.add(input);
+//
+//        ButtonGroup group= new ButtonGroup();
+//        group.add(radioButton);
+//        group.add(radioButton1);
+//
+//        container.add(radioButton);
+//        container.add(radioButton1);
+//
+//        radioButton.setSelected(true);
+//        button.addActionListener(new Onclick());
+//        container.add(button);
+//    }
+//    class  Onclick implements ActionListener {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            if (radioButton.isSelected()) {
+//                System.exit(1);
+//            } else {
+//                String message = "";
+//                message += "Button was pressed \n";
+//                message += "Text is" + input.getText() + "\n";
+//                JOptionPane.showConfirmDialog(null, message, "", JOptionPane.PLAIN_MESSAGE);
+//            }
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class Balloon extends  JFrame {
+    public Balloon() {
+        JFrame frame = new JFrame("Window");
+        frame.setBounds(500, 250, 500, 500);
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(null);
+        JButton button = new JButton("Click");
+        jPanel.add(button);
+        frame.add(jPanel);
+        frame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                for (int i = 0; i <1 ; i++) {
+                    super.mouseClicked(e);
+                    button.setBounds(e.getX()-button.getWidth()/2,e.getY()-button.getHeight(),150,50);
+                    System.out.println(e.getX()+" "+e.getY()+"\n");
+
+                }
+                if(button.getX()<=0&&button.getY()<=250||button.getX()<=250&&button.getY()<=250) {
+                    button.setBackground(Color.cyan);
+                }else if (button.getX()>251&&button.getY()<=250||button.getX()<=500&&button.getY()<=250){
+                    button.setBackground(Color.GREEN);
+                }else if (button.getX()>251&&button.getY()>=250||button.getX()<=500&&button.getY()<=500){
+                    button.setBackground(Color.orange);
+                }
+            }
+        });
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("poisition x button: "+button.getX()+" "+"position y button: "+button.getY()+"\n");
+            }
+        });
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public String Read(int value) throws IOException {
+            //File setting = new File("C:\\Users\\Sviatoslav\\Desktop\\Kurduplanadia.txt");
+            FileReader reader = new FileReader("C:\\Users\\Sviatoslav\\Desktop\\Size.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String b = bufferedReader.readLine();
+            byte i = 0;
+            while (i < value - 1) {
+                b = bufferedReader.readLine();
+                i++;
+                if (i - 1 == value - 1) {
+                    return b;
+                }
+            }
+            return b;
+        }
+
+
+        void zapis(int a) {
+                File file = new File("C:\\Users\\Sviatoslav\\Desktop\\Size.txt");
+                if (!file.exists()) {
+                    try {
+                        file.createNewFile();
+                        System.err.println("Successfully created file");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                try {
+                    PrintWriter printWriter = new PrintWriter(new FileWriter(file, false));
+                    printWriter.print(a);
+                    printWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
